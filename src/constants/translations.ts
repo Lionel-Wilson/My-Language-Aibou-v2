@@ -348,7 +348,7 @@ export const translations = {
     analyseDescription: '詳細分析句子結構同意思',
     correctionDescription: '修正語法錯誤，提升句子清晰度',
     yourAiLanguageAssistant: '你最佳嘅語言助手'
-  }
+  },
   Arabic: {
     appName: 'رفيق لغتي',
     appSubtitle: 'رفيقك المثالي لتعلم اللغات',
