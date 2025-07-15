@@ -1,6 +1,6 @@
-import { ApiRequest, ApiResponse } from '../types';
+import { ApiRequest } from '../types';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v2';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export class ApiService {
   private static async makeRequest(endpoint: string, data: ApiRequest): Promise<string> {

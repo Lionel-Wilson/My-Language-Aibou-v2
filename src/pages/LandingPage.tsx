@@ -9,7 +9,6 @@ import {
   Shield,
   ArrowRight,
   Star,
-  Users,
   Languages
 } from 'lucide-react';
 
