@@ -14,14 +14,15 @@ export class ApiService {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const result = await response.text();
+        throw new Error(result.replace(/^"|"$/g, ''));
       }
 
       const result = await response.text();
       return result.replace(/^"|"$/g, ''); // Remove surrounding quotes if present
     } catch (error) {
       console.error('API Error:', error);
-      throw new Error('Failed to fetch data. Please try again.');
+      throw error;
     }
   }
 

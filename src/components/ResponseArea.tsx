@@ -64,8 +64,7 @@ export const ResponseArea: React.FC<ResponseAreaProps> = ({ content, loading, er
   if (error) {
     return (
       <div className="bg-red-900/20 border border-red-800 rounded-lg p-4 text-red-400">
-        <p className="font-medium">Error occurred:</p>
-        <p className="text-sm mt-1">{error}</p>
+        <p className="font-medium">{error}</p>
       </div>
     );
   }
