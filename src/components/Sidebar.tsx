@@ -49,8 +49,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="p-6 border-b border-slate-700">
-            <h1 className="text-2xl font-bold text-white">{t('appName')}</h1>
-            <p className="text-sm text-slate-400 mt-1">{t('appSubtitle')}</p>
+            <h1 className="text-xl font-bold text-white">{t('appName')}</h1>
+            <p className="text-xs text-slate-400 mt-1">{t('appSubtitle')}</p>
           </div>
 
           {/* Navigation */}

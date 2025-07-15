@@ -1,7 +1,7 @@
 export const translations = {
   English: {
-    appName: 'My Language',
-    appSubtitle: 'Aibou',
+    appName: 'My Language Aibou',
+    appSubtitle: 'Your Ultimate Language Companion',
     dictionary: 'Dictionary',
     analyse: 'Analyse',
     correction: 'Correction',
@@ -22,11 +22,11 @@ export const translations = {
     dictionaryDescription: 'Get comprehensive word information including definition, synonyms, and history',
     analyseDescription: 'Get detailed analysis and explanations of sentence structure and meaning',
     correctionDescription: 'Fix grammar errors and improve sentence clarity',
-    yourAiLanguageAssistant: 'Your AI Language Assistant'
+    yourAiLanguageAssistant: 'Your Ultimate Language Companion'
   },
   Spanish: {
-    appName: 'Mi Idioma',
-    appSubtitle: 'Aibou',
+    appName: 'Mi Compañero de Idiomas',
+    appSubtitle: 'Tu Compañero Definitivo de Idiomas',
     dictionary: 'Diccionario',
     analyse: 'Analizar',
     correction: 'Corrección',
@@ -50,8 +50,8 @@ export const translations = {
     yourAiLanguageAssistant: 'Tu Asistente de Idiomas AI'
   },
   French: {
-    appName: 'Ma Langue',
-    appSubtitle: 'Aibou',
+    appName: 'Mon Partenaire Linguistique',
+    appSubtitle: 'Votre Partenaire Linguistique Ultime',
     dictionary: 'Dictionnaire',
     analyse: 'Analyser',
     correction: 'Correction',
@@ -75,8 +75,8 @@ export const translations = {
     yourAiLanguageAssistant: 'Votre Assistant Linguistique AI'
   },
   German: {
-    appName: 'Meine Sprache',
-    appSubtitle: 'Aibou',
+    appName: 'Mein Sprachpartner',
+    appSubtitle: 'Dein Ultimativer Sprachbegleiter',
     dictionary: 'Wörterbuch',
     analyse: 'Analysieren',
     correction: 'Korrektur',
@@ -100,8 +100,8 @@ export const translations = {
     yourAiLanguageAssistant: 'Ihr AI-Sprachassistent'
   },
   Italian: {
-    appName: 'La Mia Lingua',
-    appSubtitle: 'Aibou',
+    appName: 'Il Mio Compagno di Lingua',
+    appSubtitle: 'Il Tuo Compagno Linguistico Definitivo',
     dictionary: 'Dizionario',
     analyse: 'Analizzare',
     correction: 'Correzione',
@@ -125,8 +125,8 @@ export const translations = {
     yourAiLanguageAssistant: 'Il Tuo Assistente Linguistico AI'
   },
   Portuguese: {
-    appName: 'Minha Língua',
-    appSubtitle: 'Aibou',
+    appName: 'Meu Companheiro de Idiomas',
+    appSubtitle: 'Seu Companheiro Definitivo de Idiomas',
     dictionary: 'Dicionário',
     analyse: 'Analisar',
     correction: 'Correção',
@@ -150,8 +150,8 @@ export const translations = {
     yourAiLanguageAssistant: 'Seu Assistente de Idiomas AI'
   },
   Russian: {
-    appName: 'Мой Язык',
-    appSubtitle: 'Aibou',
+    appName: 'Мой Языковой Партнёр',
+    appSubtitle: 'Ваш Идеальный Помощник по Языкам',
     dictionary: 'Словарь',
     analyse: 'Анализировать',
     correction: 'Исправление',
@@ -175,8 +175,8 @@ export const translations = {
     yourAiLanguageAssistant: 'Ваш AI Языковой Ассистент'
   },
   Japanese: {
-    appName: '私の言語',
-    appSubtitle: 'Aibou',
+    appName: '私の言語相棒',
+    appSubtitle: 'あなたの究極の言語パートナー',
     dictionary: '辞書',
     analyse: '分析',
     correction: '修正',
@@ -200,8 +200,8 @@ export const translations = {
     yourAiLanguageAssistant: 'あなたのAI言語アシスタント'
   },
   Korean: {
-    appName: '내 언어',
-    appSubtitle: 'Aibou',
+    appName: '나의 언어 파트너',
+    appSubtitle: '최고의 언어 동반자',
     dictionary: '사전',
     analyse: '분석',
     correction: '교정',
@@ -225,8 +225,8 @@ export const translations = {
     yourAiLanguageAssistant: '당신의 AI 언어 도우미'
   },
   Chinese: {
-    appName: '我的语言',
-    appSubtitle: 'Aibou',
+    appName: '我的语言伙伴',
+    appSubtitle: '您终极的语言助手',
     dictionary: '词典',
     analyse: '分析',
     correction: '纠正',
@@ -250,8 +250,8 @@ export const translations = {
     yourAiLanguageAssistant: '您的AI语言助手'
   },
   Arabic: {
-    appName: 'لغتي',
-    appSubtitle: 'Aibou',
+    appName: 'رفيق لغتي',
+    appSubtitle: 'رفيقك المثالي لتعلم اللغات',
     dictionary: 'القاموس',
     analyse: 'تحليل',
     correction: 'تصحيح',
@@ -275,8 +275,8 @@ export const translations = {
     yourAiLanguageAssistant: 'مساعدك اللغوي بالذكاء الاصطناعي'
   },
   Hindi: {
-    appName: 'मेरी भाषा',
-    appSubtitle: 'Aibou',
+    appName: 'मेरे भाषा साथी',
+    appSubtitle: 'आपका परम भाषा साथी',
     dictionary: 'शब्दकोश',
     analyse: 'विश्लेषण',
     correction: 'सुधार',
