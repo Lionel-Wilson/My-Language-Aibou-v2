@@ -7,4 +7,5 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  base: '/', // Leave as '/' unless you're deploying under a subdirectory
 });
