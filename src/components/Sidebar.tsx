@@ -7,6 +7,7 @@ import {
   X
 } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
+import {Link} from "react-router-dom";
 
 interface SidebarProps {
   activeTab: string;
@@ -48,10 +49,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
       `}>
         <div className="flex flex-col h-full">
           {/* Header */}
+          <Link to="/">
           <div className="p-6 border-b border-slate-700">
             <h1 className="text-xl font-bold text-white">{t('appName')}</h1>
             <p className="text-xs text-slate-400 mt-1">{t('appSubtitle')}</p>
           </div>
+          </Link>
+
 
           {/* Navigation */}
           <nav className="flex-1 px-4 py-6 space-y-2">
