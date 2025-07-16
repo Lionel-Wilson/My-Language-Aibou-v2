@@ -46,12 +46,13 @@ export const TextSelectionProvider: React.FC<TextSelectionProviderProps> = ({
     
     if (cleanText) {
       // Create URL for dictionary lookup in new tab
-      const dictionaryUrl = `/app?tab=dictionary&word=${encodeURIComponent(cleanText)}&lang=${encodeURIComponent(currentLanguage)}`;
+      const dictionaryUrl = `/app?tab=dictionary&word=${encodeURIComponent(cleanText)}`;
       window.open(dictionaryUrl, '_blank');
     }
     
     hideTooltip();
-  }, [currentLanguage, hideTooltip]);
+  }
+  )
 
   const value = {
     selectedText,
