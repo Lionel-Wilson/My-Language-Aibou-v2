@@ -7,6 +7,7 @@ export interface ApiRequest {
   word?: string;
   sentence?: string;
   nativeLanguage: string;
+  isDetailed?: boolean;
 }
 
 export interface HistoryItem {

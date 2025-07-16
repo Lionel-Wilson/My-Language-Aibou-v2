@@ -36,7 +36,7 @@ export const AppPage: React.FC = () => {
   // Separate state for each tab
   const [tabStates, setTabStates] = useState<Record<string, TabState>>({
     dictionary: { ...initialTabState, language: globalLanguage },
-    analyse: { ...initialTabState, language: globalLanguage },
+    translate: { ...initialTabState, language: globalLanguage },
     correction: { ...initialTabState, language: globalLanguage },
   });
 
@@ -46,7 +46,7 @@ export const AppPage: React.FC = () => {
     const word = searchParams.get('word');
     const lang = searchParams.get('lang');
 
-    if (tab && ['dictionary', 'analyse', 'correction'].includes(tab)) {
+    if (tab && ['dictionary', 'translate', 'correction'].includes(tab)) {
       setActiveTab(tab);
     }
 
@@ -95,7 +95,7 @@ export const AppPage: React.FC = () => {
     switch (tab) {
       case 'dictionary':
         return t('dictionary');
-      case 'analyse':
+      case 'translate':
         return t('analyse');
       case 'correction':
         return t('correction');
@@ -108,7 +108,7 @@ export const AppPage: React.FC = () => {
     switch (tab) {
       case 'dictionary':
         return t('dictionaryDescription');
-      case 'analyse':
+      case 'translate':
         return t('analyseDescription');
       case 'correction':
         return t('correctionDescription');

@@ -50,7 +50,7 @@ export const ResponseArea: React.FC<ResponseAreaProps> = ({ content, loading, er
     switch (activeTab) {
       case 'dictionary':
         return t('wordInformation');
-      case 'analyse':
+      case 'translate':
         return t('analysis');
       case 'correction':
         return t('correction');

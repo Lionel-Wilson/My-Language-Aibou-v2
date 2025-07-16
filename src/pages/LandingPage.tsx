@@ -24,10 +24,10 @@ export const LandingPage: React.FC = () => {
     },
     {
       icon: MessageCircle,
-      title: 'Slang Comprehension 👊🏽',
-      description: 'No more asking your friends what "stop the cap" or "she\'s leng" means. Just look it up in the "Analyser" section.',
+      title: 'Translation & Slang Comprehension 👊🏽',
+      description: 'No more asking your friends what "stop the cap" or "she\'s leng" means. Just look it up in the "Translator" section.',
       color: 'text-green-400',
-      highlight: 'Modern Slang'
+      highlight: 'Translation & Slang'
     },
     {
       icon: CheckCircle,

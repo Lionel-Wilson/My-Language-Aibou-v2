@@ -3,7 +3,6 @@ import {
   BookOpen, 
   MessageCircle, 
   CheckCircle,
-  Menu,
   X
 } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
@@ -27,7 +26,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const tabs = [
     { id: 'dictionary', icon: BookOpen, label: t('dictionary') },
-    { id: 'analyse', icon: MessageCircle, label: t('analyse') },
+    { id: 'translate', icon: MessageCircle, label: t('analyse') },
     { id: 'correction', icon: CheckCircle, label: t('correction') },
   ];
 

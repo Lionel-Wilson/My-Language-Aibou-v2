@@ -38,8 +38,8 @@ export class ApiService {
     return this.makeRequest('/word/history', { word, nativeLanguage });
   }
 
-  static async explainSentence(sentence: string, nativeLanguage: string): Promise<string> {
-    return this.makeRequest('/sentence/explanation', { sentence, nativeLanguage });
+  static async explainSentence(sentence: string, nativeLanguage: string, isDetailed: boolean = false): Promise<string> {
+    return this.makeRequest('/sentence/explanation', { sentence, nativeLanguage, isDetailed });
   }
 
   static async correctSentence(sentence: string, nativeLanguage: string): Promise<string> {
