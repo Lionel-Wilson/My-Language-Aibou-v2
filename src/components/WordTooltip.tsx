@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { BookOpen, X } from 'lucide-react';
+import { BookOpen, Languages, X } from 'lucide-react';
 import { useTextSelection } from './WordHoverProvider';
 
 export const TextSelectionTooltip: React.FC = () => {
-  const { selectedText, selectionPosition, hideTooltip, lookupWord } = useTextSelection();
+  const { selectedText, selectionPosition, selectionType, hideTooltip, lookupWord, translatePhrase } = useTextSelection();
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,18 +39,26 @@ export const TextSelectionTooltip: React.FC = () => {
     };
   }, [selectedText, hideTooltip]);
 
-  if (!selectedText || !selectionPosition) {
+  if (!selectedText || !selectionPosition || !selectionType) {
     return null;
   }
 
-  const handleLookup = () => {
-    lookupWord(selectedText);
+  const handleAction = () => {
+    if (selectionType === 'word') {
+      lookupWord(selectedText);
+    } else {
+      translatePhrase(selectedText);
+    }
   };
 
   // Truncate long selections for display
   const displayText = selectedText.length > 30 
     ? `${selectedText.substring(0, 30)}...` 
     : selectedText;
+
+  const isWord = selectionType === 'word';
+  const actionLabel = isWord ? 'Define in Dictionary' : 'Translate';
+  const ActionIcon = isWord ? BookOpen : Languages;
 
   return (
     <div
@@ -78,12 +86,12 @@ export const TextSelectionTooltip: React.FC = () => {
       </div>
       
       <button
-        onClick={handleLookup}
+        onClick={handleAction}
         className="w-full flex items-center gap-2 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors text-sm font-medium"
-        aria-label={`Look up ${selectedText} in dictionary`}
+        aria-label={`${actionLabel} for ${selectedText}`}
       >
-        <BookOpen size={16} />
-        Define in Dictionary
+        <ActionIcon size={16} />
+        {actionLabel}
       </button>
     </div>
   );

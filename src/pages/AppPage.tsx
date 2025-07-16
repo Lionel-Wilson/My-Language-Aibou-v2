@@ -44,6 +44,7 @@ export const AppPage: React.FC = () => {
   React.useEffect(() => {
     const tab = searchParams.get('tab');
     const word = searchParams.get('word');
+    const sentence = searchParams.get('sentence');
     const lang = searchParams.get('lang');
 
     if (tab && ['dictionary', 'translate', 'correction'].includes(tab)) {
@@ -57,6 +58,18 @@ export const AppPage: React.FC = () => {
         dictionary: {
           ...prev.dictionary,
           input: word,
+          language: targetLanguage,
+        }
+      }));
+    }
+
+    if (sentence && tab === 'translate') {
+      const targetLanguage = lang || globalLanguage;
+      setTabStates(prev => ({
+        ...prev,
+        translate: {
+          ...prev.translate,
+          input: sentence,
           language: targetLanguage,
         }
       }));
