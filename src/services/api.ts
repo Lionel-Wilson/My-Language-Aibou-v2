@@ -1,6 +1,6 @@
 import { ApiRequest } from '../types';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.RAILWAY_PRIVATE_DOMAIN;
 
 export class ApiService {
   private static async makeRequest(endpoint: string, data: ApiRequest): Promise<string> {
