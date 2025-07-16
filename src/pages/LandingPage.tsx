@@ -6,9 +6,10 @@ import {
   CheckCircle, 
   Globe, 
   Zap, 
-  Shield,
+  Search,
   ArrowRight,
   Star,
+  Users,
   Languages
 } from 'lucide-react';
 
@@ -16,44 +17,47 @@ export const LandingPage: React.FC = () => {
   const features = [
     {
       icon: BookOpen,
-      title: 'Smart Dictionary',
-      description: 'Get comprehensive word definitions, synonyms, and etymology all in one place. Perfect for expanding your vocabulary.',
-      color: 'text-blue-400'
+      title: 'Definitions & Explanations in Your Native Language 🗣️',
+      description: 'Just enter a word or sentence, select your native language, and watch the magic happen. No more confusing translations!',
+      color: 'text-blue-400',
+      highlight: 'Native Language Support'
     },
     {
       icon: MessageCircle,
-      title: 'Sentence Analysis',
-      description: 'Understand complex sentence structures, grammar patterns, and cultural context with detailed explanations.',
-      color: 'text-green-400'
+      title: 'Slang Comprehension 👊🏽',
+      description: 'No more asking your friends what "stop the cap" or "she\'s leng" means. Just look it up in the "Analyser" section.',
+      color: 'text-green-400',
+      highlight: 'Modern Slang'
     },
     {
       icon: CheckCircle,
-      title: 'Grammar Correction',
-      description: 'Fix grammar errors and improve your writing clarity with intelligent suggestions and corrections.',
-      color: 'text-purple-400'
+      title: 'Sentence Correction 👨🏻‍🏫',
+      description: 'Wondering if your sentence is grammatically correct or natural? Paste it in the "Correction" section and receive feedback instantly!',
+      color: 'text-purple-400',
+      highlight: 'Instant Feedback'
     }
   ];
 
   const benefits = [
     {
+      icon: Search,
+      title: 'Recursive Look-ups 🔍',
+      description: 'Don\'t understand what a word in the explanation means? Highlight the word and click define to look it up in a new tab!'
+    },
+    {
       icon: Globe,
-      title: '15+ Languages Supported',
-      description: 'Learn and work with English, Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean, Chinese, Arabic, and more.'
+      title: 'Unlimited Languages 🌍',
+      description: 'Your native language missing? Message me and I\'ll add it. We support 12+ languages and growing!'
     },
     {
       icon: Zap,
-      title: 'Instant Results',
-      description: 'Get immediate, accurate responses to help you understand and improve your language skills in real-time.'
-    },
-    {
-      icon: Shield,
-      title: 'Privacy Focused',
-      description: 'Your data stays secure. We prioritize your privacy while providing powerful language assistance.'
+      title: 'Instant & Accurate',
+      description: 'Get immediate, precise responses that help you understand and improve your language skills in real-time.'
     }
   ];
 
   const stats = [
-    { number: '15+', label: 'Languages' },
+    { number: '12+', label: 'Languages' },
     { number: '3', label: 'Core Features' },
     { number: '24/7', label: 'Available' },
     { number: '∞', label: 'Possibilities' }
@@ -68,8 +72,8 @@ export const LandingPage: React.FC = () => {
             <div className="flex items-center space-x-2">
               <Languages className="w-8 h-8 text-blue-400" />
               <div>
-                <h1 className="text-xl font-bold">My Language Aibou</h1>
-                <p className="text-sm text-slate-400">Your Ultimate Language Companion</p>
+                <h1 className="text-xl font-bold">My Language</h1>
+                <p className="text-sm text-slate-400">Aibou</p>
               </div>
             </div>
             <Link
@@ -92,11 +96,11 @@ export const LandingPage: React.FC = () => {
               <span className="text-sm text-slate-300">Your AI Language Assistant</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-green-400 bg-clip-text text-transparent">
-              Master Any Language
+              No More Google Translate!
             </h1>
             <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Unlock the power of multilingual communication with our comprehensive language tool. 
-              Get instant definitions, analyze complex sentences, and perfect your grammar across 12 languages.
+              Get definitions and explanations in your native language, correct your grammar instantly, 
+              understand slang, and explore words recursively. Your complete language companion is here.
             </p>
           </div>
           
@@ -138,10 +142,15 @@ export const LandingPage: React.FC = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <div key={index} className="bg-slate-800 rounded-xl p-8 border border-slate-700 hover:border-slate-600 transition-colors">
-                <div className={`w-12 h-12 rounded-lg bg-slate-700 flex items-center justify-center mb-6`}>
-                  <feature.icon className={`w-6 h-6 ${feature.color}`} />
+                <div className="flex items-center justify-between mb-4">
+                  <div className={`w-12 h-12 rounded-lg bg-slate-700 flex items-center justify-center`}>
+                    <feature.icon className={`w-6 h-6 ${feature.color}`} />
+                  </div>
+                  <span className="text-xs bg-blue-600/20 text-blue-400 px-2 py-1 rounded-full font-medium">
+                    {feature.highlight}
+                  </span>
                 </div>
-                <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
+                <h3 className="text-lg font-semibold mb-4 leading-tight">{feature.title}</h3>
                 <p className="text-slate-300 leading-relaxed">{feature.description}</p>
               </div>
             ))}
