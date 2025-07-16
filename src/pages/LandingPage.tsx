@@ -37,8 +37,8 @@ export const LandingPage: React.FC = () => {
   const benefits = [
     {
       icon: Globe,
-      title: '12 Languages Supported',
-      description: 'Learn and work with English, Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean, Chinese, Arabic, and Hindi.'
+      title: '15+ Languages Supported',
+      description: 'Learn and work with English, Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean, Chinese, Arabic, and more.'
     },
     {
       icon: Zap,
@@ -53,7 +53,7 @@ export const LandingPage: React.FC = () => {
   ];
 
   const stats = [
-    { number: '12+', label: 'Languages' },
+    { number: '15+', label: 'Languages' },
     { number: '3', label: 'Core Features' },
     { number: '24/7', label: 'Available' },
     { number: '∞', label: 'Possibilities' }
@@ -68,8 +68,8 @@ export const LandingPage: React.FC = () => {
             <div className="flex items-center space-x-2">
               <Languages className="w-8 h-8 text-blue-400" />
               <div>
-                <h1 className="text-xl font-bold">My Language</h1>
-                <p className="text-sm text-slate-400">Aibou</p>
+                <h1 className="text-xl font-bold">My Language Aibou</h1>
+                <p className="text-sm text-slate-400">Your Ultimate Language Companion</p>
               </div>
             </div>
             <Link
