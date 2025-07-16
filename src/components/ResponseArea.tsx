@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Copy, Check } from 'lucide-react';
 import { LoadingSpinner } from './LoadingSpinner';
+import { InteractiveText } from './InteractiveText';
 import { useTranslation } from '../hooks/useTranslation';
 
 interface ResponseAreaProps {
@@ -64,7 +65,8 @@ export const ResponseArea: React.FC<ResponseAreaProps> = ({ content, loading, er
   if (error) {
     return (
       <div className="bg-red-900/20 border border-red-800 rounded-lg p-4 text-red-400">
-        <p className="font-medium">{error}</p>
+        <p className="font-medium">Error occurred:</p>
+        <p className="text-sm mt-1">{error}</p>
       </div>
     );
   }
@@ -90,28 +92,30 @@ export const ResponseArea: React.FC<ResponseAreaProps> = ({ content, loading, er
           {copied ? t('copied') : t('copy')}
         </button>
       </div>
-      <div className="p-6 prose prose-sm max-w-none prose-headings:text-white prose-headings:font-semibold prose-p:text-slate-300 prose-p:leading-relaxed prose-strong:text-white prose-em:text-slate-400">
-        <ReactMarkdown 
-          remarkPlugins={[remarkGfm]}
-          components={{
-            p: ({ children }) => <p className="mb-4 last:mb-0 text-slate-300 leading-relaxed">{children}</p>,
-            ul: ({ children }) => <ul className="mb-4 ml-6 list-disc space-y-1">{children}</ul>,
-            ol: ({ children }) => <ol className="mb-4 ml-6 list-decimal space-y-1">{children}</ol>,
-            li: ({ children }) => <li className="text-slate-300">{children}</li>,
-            strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
-            em: ({ children }) => <em className="italic text-slate-400">{children}</em>,
-            h1: ({ children }) => <h1 className="text-xl font-bold mb-4 text-white border-b border-slate-600 pb-2">{children}</h1>,
-            h2: ({ children }) => <h2 className="text-lg font-semibold mb-3 text-white mt-6 first:mt-0">{children}</h2>,
-            h3: ({ children }) => <h3 className="text-md font-medium mb-2 text-white mt-4">{children}</h3>,
-            code: ({ children }) => <code className="bg-slate-700 px-2 py-1 rounded text-sm font-mono text-slate-200">{children}</code>,
-            blockquote: ({ children }) => <blockquote className="border-l-4 border-blue-500 pl-4 italic text-slate-400 bg-slate-700/50 py-2 my-4">{children}</blockquote>,
-            // Handle line breaks properly
-            br: () => <br className="mb-2" />,
-          }}
-        >
-          {processedContent}
-        </ReactMarkdown>
-      </div>
+      <InteractiveText className="p-6 prose prose-sm max-w-none prose-headings:text-white prose-headings:font-semibold prose-p:text-slate-300 prose-p:leading-relaxed prose-strong:text-white prose-em:text-slate-400">
+        <div>
+          <ReactMarkdown 
+            remarkPlugins={[remarkGfm]}
+            components={{
+              p: ({ children }) => <p className="mb-4 last:mb-0 text-slate-300 leading-relaxed">{children}</p>,
+              ul: ({ children }) => <ul className="mb-4 ml-6 list-disc space-y-1">{children}</ul>,
+              ol: ({ children }) => <ol className="mb-4 ml-6 list-decimal space-y-1">{children}</ol>,
+              li: ({ children }) => <li className="text-slate-300">{children}</li>,
+              strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
+              em: ({ children }) => <em className="italic text-slate-400">{children}</em>,
+              h1: ({ children }) => <h1 className="text-xl font-bold mb-4 text-white border-b border-slate-600 pb-2">{children}</h1>,
+              h2: ({ children }) => <h2 className="text-lg font-semibold mb-3 text-white mt-6 first:mt-0">{children}</h2>,
+              h3: ({ children }) => <h3 className="text-md font-medium mb-2 text-white mt-4">{children}</h3>,
+              code: ({ children }) => <code className="bg-slate-700 px-2 py-1 rounded text-sm font-mono text-slate-200">{children}</code>,
+              blockquote: ({ children }) => <blockquote className="border-l-4 border-blue-500 pl-4 italic text-slate-400 bg-slate-700/50 py-2 my-4">{children}</blockquote>,
+              // Handle line breaks properly
+              br: () => <br className="mb-2" />,
+            }}
+          >
+            {processedContent}
+          </ReactMarkdown>
+        </div>
+      </InteractiveText>
     </div>
   );
 };

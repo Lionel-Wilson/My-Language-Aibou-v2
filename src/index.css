@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Interactive text selection styles */
+.interactive-text {
+  position: relative;
+  user-select: text;
+}
+
+.interactive-text {
+  cursor: text;
+}
+
+/* Smooth transitions for selection effects */
+.interactive-text * {
+  user-select: text;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .interactive-text * {
+    transition: none;
+  }
+}
