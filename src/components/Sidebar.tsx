@@ -33,14 +33,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <>
-      {/* Mobile Menu Button */}
-      <button
-        onClick={onMobileMenuToggle}
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-slate-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-      >
-        {isMobileMenuOpen ? <X size={24} className="text-white" /> : <Menu size={24} className="text-white" />}
-      </button>
-
       {/* Sidebar */}
       <div className={`
         fixed inset-y-0 left-0 z-40 w-64 bg-slate-800 shadow-xl transform transition-transform duration-300 ease-in-out
@@ -49,13 +41,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
       `}>
         <div className="flex flex-col h-full">
           {/* Header */}
-          <Link to="/">
-          <div className="p-6 border-b border-slate-700">
-            <h1 className="text-xl font-bold text-white">{t('appName')}</h1>
-            <p className="text-xs text-slate-400 mt-1">{t('appSubtitle')}</p>
+          <div className="p-6 border-b border-slate-700 relative">
+            {/* Mobile Close Button */}
+            <button
+              onClick={onMobileMenuToggle}
+              className="md:hidden absolute top-4 right-4 p-2 text-slate-400 hover:text-white transition-colors"
+            >
+              <X size={20} />
+            </button>
+            <Link to="/">
+            <div className="pr-12 md:pr-0">
+              <h1 className="text-2xl font-bold text-white">{t('appName')}</h1>
+              <p className="text-sm text-slate-400 mt-1">{t('appSubtitle')}</p>
+            </div>
+            </Link>
           </div>
-          </Link>
-
 
           {/* Navigation */}
           <nav className="flex-1 px-4 py-6 space-y-2">
