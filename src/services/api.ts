@@ -5,7 +5,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export class ApiService {
   private static async makeRequest(endpoint: string, data: ApiRequest): Promise<string> {
     try {
-      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      const response = await fetch(`${API_BASE_URL}/api/v2${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
