@@ -40,6 +40,20 @@ export const InputForm: React.FC<InputFormProps> = ({
     onInputChange('');
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      if (type === 'word') {
+        // For single-line input, always submit on Enter
+        e.preventDefault();
+        handleSubmit(e);
+      } else if (type === 'sentence' && !e.shiftKey) {
+        // For textarea, submit on Enter but allow Shift+Enter for new lines
+        e.preventDefault();
+        handleSubmit(e);
+      }
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} className="bg-slate-800 rounded-lg shadow-sm border border-slate-700 p-6">
       <div className="space-y-4">
@@ -67,6 +81,7 @@ export const InputForm: React.FC<InputFormProps> = ({
                 rows={3}
                 className="w-full px-4 py-3 pr-10 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none text-white placeholder-slate-400"
                 disabled={loading}
+                onKeyDown={handleKeyDown}
               />
             )}
             {value && (
