@@ -26,7 +26,7 @@ const initialTabState: TabState = {
 };
 
 export const AppPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('dictionary');
+  const [activeTab, setActiveTab] = useState('translate');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const [history, setHistory] = useLocalStorage<HistoryItem[]>('language-aibou-history', []);
@@ -35,8 +35,8 @@ export const AppPage: React.FC = () => {
   
   // Separate state for each tab
   const [tabStates, setTabStates] = useState<Record<string, TabState>>({
-    dictionary: { ...initialTabState, language: globalLanguage },
     translate: { ...initialTabState, language: globalLanguage },
+    dictionary: { ...initialTabState, language: globalLanguage },
     correction: { ...initialTabState, language: globalLanguage },
   });
 

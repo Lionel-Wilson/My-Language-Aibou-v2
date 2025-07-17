@@ -25,8 +25,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   t
 }) => {
   const tabs = [
-    { id: 'dictionary', icon: BookOpen, label: t('dictionary') },
     { id: 'translate', icon: MessageCircle, label: t('analyse') },
+    { id: 'dictionary', icon: BookOpen, label: t('dictionary') },
     { id: 'correction', icon: CheckCircle, label: t('correction') },
   ];
 
