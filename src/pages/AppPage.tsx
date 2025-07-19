@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Menu } from 'lucide-react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Menu, BookOpen, MessageCircle, CheckCircle, Home } from 'lucide-react';
 import { Sidebar } from '../components/Sidebar';
 import { TabContent } from '../components/TabContent';
 import { TextSelectionProvider } from '../components/WordHoverProvider';
@@ -29,6 +29,7 @@ export const AppPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('translate');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [history, setHistory] = useLocalStorage<HistoryItem[]>('language-aibou-history', []);
   const [globalLanguage, setGlobalLanguage] = useLocalStorage<string>('global-language', 'English');
   const { t } = useTranslation(globalLanguage);
@@ -130,11 +131,26 @@ export const AppPage: React.FC = () => {
     }
   };
 
+  const mobileTabItems = [
+    { id: 'home', icon: Home, label: 'Home', isExternal: true },
+    { id: 'translate', icon: MessageCircle, label: t('analyse') },
+    { id: 'dictionary', icon: BookOpen, label: t('dictionary') },
+    { id: 'correction', icon: CheckCircle, label: t('correction') },
+  ];
+
+  const handleMobileTabClick = (tabId: string) => {
+    if (tabId === 'home') {
+      navigate('/');
+    } else {
+      setActiveTab(tabId);
+    }
+  };
+
   return (
     <TextSelectionProvider currentLanguage={globalLanguage}>
-      <div className="min-h-screen bg-slate-900">
+      <div className="min-h-screen bg-slate-900 pb-20 md:pb-0">
         {/* Mobile Header with Menu Button */}
-        <div className="md:hidden bg-slate-800 border-b border-slate-700 px-4 py-3 flex items-center justify-between">
+        <div className="hidden bg-slate-800 border-b border-slate-700 px-4 py-3 items-center justify-between">
           <button
             onClick={handleMobileMenuToggle}
             className="p-2 text-slate-400 hover:text-white transition-colors"
@@ -147,7 +163,7 @@ export const AppPage: React.FC = () => {
           <div className="w-10"></div> {/* Spacer for centering */}
         </div>
 
-        <div className="flex h-screen">
+        <div className="flex h-screen md:h-screen">
           <Sidebar
             activeTab={activeTab}
             onTabChange={setActiveTab}
@@ -156,7 +172,7 @@ export const AppPage: React.FC = () => {
             t={t}
           />
           
-          <main className="flex-1 overflow-auto md:h-screen">
+          <main className="flex-1 overflow-auto h-screen md:h-screen">
             <div className="max-w-4xl mx-auto p-6 md:p-8">
               <div className="mb-8">
                 <h1 className="text-3xl font-bold text-white mb-2">
@@ -176,6 +192,28 @@ export const AppPage: React.FC = () => {
               />
             </div>
           </main>
+        </div>
+
+        {/* Mobile Bottom Tab Bar */}
+        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-slate-800 border-t border-slate-700 z-50">
+          <div className="flex">
+            {mobileTabItems.map(({ id, icon: Icon, label, isExternal }) => (
+              <button
+                key={id}
+                onClick={() => handleMobileTabClick(id)}
+                className={`
+                  flex-1 flex flex-col items-center justify-center py-3 px-2 transition-all duration-200
+                  ${(activeTab === id && !isExternal) || (id === 'home' && false)
+                    ? 'text-blue-400 bg-slate-700/50' 
+                    : 'text-slate-400 hover:text-slate-300'
+                  }
+                `}
+              >
+                <Icon size={20} className="mb-1" />
+                <span className="text-xs font-medium truncate">{label}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         <TextSelectionTooltip />
