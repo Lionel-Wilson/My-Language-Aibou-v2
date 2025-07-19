@@ -149,6 +149,8 @@ export const TabContent: React.FC<TabContentProps> = ({
         loading={tabState.loading}
         error={tabState.error}
         activeTab={activeTab}
+        language={tabState.language}
+        translationMode={translationMode}
         t={t}
       />
     </div>

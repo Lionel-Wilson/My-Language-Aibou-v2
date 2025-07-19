@@ -1,21 +1,33 @@
 import React, { useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, Volume2, VolumeX } from 'lucide-react';
 import { LoadingSpinner } from './LoadingSpinner';
 import { InteractiveText } from './InteractiveText';
 import { useTranslation } from '../hooks/useTranslation';
+import { getSpeechLangCode, isSpeechSynthesisSupported, getVoicesForLanguage } from '../utils/languageUtils';
 
 interface ResponseAreaProps {
   content: string;
   loading: boolean;
   error: string | null;
   activeTab: string;
+  language?: string;
+  translationMode?: string;
   t: ReturnType<typeof useTranslation>['t'];
 }
 
-export const ResponseArea: React.FC<ResponseAreaProps> = ({ content, loading, error, activeTab, t }) => {
+export const ResponseArea: React.FC<ResponseAreaProps> = ({ 
+  content, 
+  loading, 
+  error, 
+  activeTab, 
+  language = 'English',
+  translationMode = 'simple',
+  t 
+}) => {
   const [copied, setCopied] = React.useState(false);
+  const [isPlaying, setIsPlaying] = React.useState(false);
   const responseRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,6 +35,16 @@ export const ResponseArea: React.FC<ResponseAreaProps> = ({ content, loading, er
       responseRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }, [content]);
+
+  // Cleanup speech synthesis when component unmounts or content changes
+  useEffect(() => {
+    return () => {
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        setIsPlaying(false);
+      }
+    };
+  }, [content, activeTab, translationMode]);
 
   // Process the content to handle escaped characters and formatting
   const processContent = (rawContent: string) => {
@@ -46,6 +68,58 @@ export const ResponseArea: React.FC<ResponseAreaProps> = ({ content, loading, er
     }
   };
 
+  const handleSpeak = () => {
+    if (!isSpeechSynthesisSupported()) {
+      console.warn('Speech synthesis not supported');
+      return;
+    }
+
+    // If already playing, stop the speech
+    if (isPlaying) {
+      window.speechSynthesis.cancel();
+      setIsPlaying(false);
+      return;
+    }
+
+    const processedContent = processContent(content);
+    
+    // Remove markdown formatting for speech
+    const textToSpeak = processedContent
+      .replace(/#{1,6}\s/g, '') // Remove markdown headers
+      .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold formatting
+      .replace(/\*(.*?)\*/g, '$1') // Remove italic formatting
+      .replace(/`(.*?)`/g, '$1') // Remove code formatting
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links, keep text
+      .replace(/\n+/g, ' ') // Replace line breaks with spaces
+      .trim();
+
+    if (!textToSpeak) return;
+
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    const langCode = getSpeechLangCode(language);
+    utterance.lang = langCode;
+    
+    // Try to find a suitable voice for the language
+    const voices = getVoicesForLanguage(langCode);
+    if (voices.length > 0) {
+      // Prefer local voices over remote ones
+      const localVoice = voices.find(voice => voice.localService);
+      utterance.voice = localVoice || voices[0];
+    }
+
+    // Set speech parameters
+    utterance.rate = 0.9; // Slightly slower for better comprehension
+    utterance.pitch = 1.0;
+    utterance.volume = 1.0;
+
+    // Event handlers
+    utterance.onstart = () => setIsPlaying(true);
+    utterance.onend = () => setIsPlaying(false);
+    utterance.onerror = () => setIsPlaying(false);
+
+    window.speechSynthesis.speak(utterance);
+  };
+
   const getHeaderTitle = () => {
     switch (activeTab) {
       case 'dictionary':
@@ -58,6 +132,15 @@ export const ResponseArea: React.FC<ResponseAreaProps> = ({ content, loading, er
         return t('analysis');
     }
   };
+
+  // Show play button only for simple translations
+  const showPlayButton = activeTab === 'translate' && 
+                        translationMode === 'simple' && 
+                        content && 
+                        !loading && 
+                        !error &&
+                        isSpeechSynthesisSupported();
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -84,13 +167,25 @@ export const ResponseArea: React.FC<ResponseAreaProps> = ({ content, loading, er
     <div ref={responseRef} className="bg-slate-800 border border-slate-700 rounded-lg shadow-sm">
       <div className="flex items-center justify-between p-4 border-b border-slate-700">
         <h3 className="font-medium text-white">{getHeaderTitle()}</h3>
-        <button
-          onClick={copyToClipboard}
-          className="flex items-center gap-2 px-3 py-1 text-sm text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
-        >
-          {copied ? <Check size={16} /> : <Copy size={16} />}
-          {copied ? t('copied') : t('copy')}
-        </button>
+        <div className="flex items-center gap-2">
+          {showPlayButton && (
+            <button
+              onClick={handleSpeak}
+              className="flex items-center gap-2 px-3 py-1 text-sm text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+              title={isPlaying ? 'Stop speech' : 'Read translation aloud'}
+            >
+              {isPlaying ? <VolumeX size={16} /> : <Volume2 size={16} />}
+              {isPlaying ? 'Stop' : 'Play'}
+            </button>
+          )}
+          <button
+            onClick={copyToClipboard}
+            className="flex items-center gap-2 px-3 py-1 text-sm text-slate-400 hover:text-white hover:bg-slate-700 rounded transition-colors"
+          >
+            {copied ? <Check size={16} /> : <Copy size={16} />}
+            {copied ? t('copied') : t('copy')}
+          </button>
+        </div>
       </div>
       <InteractiveText className="p-6 prose prose-sm max-w-none prose-headings:text-white prose-headings:font-semibold prose-p:text-slate-300 prose-p:leading-relaxed prose-strong:text-white prose-em:text-slate-400">
         <div>
