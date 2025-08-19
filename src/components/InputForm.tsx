@@ -47,16 +47,7 @@ export const InputForm: React.FC<InputFormProps> = ({
   };
 
   const handleInputChange = (newValue: string) => {
-    // For sentence types, enforce character limit
-    if (type === 'sentence') {
-      const newCharCount = getCharacterCount(newValue);
-      if (newCharCount <= MAX_CHARACTERS) {
-        onInputChange(newValue);
-      }
-      // If over limit, don't update the value (prevents typing more)
-    } else {
       onInputChange(newValue);
-    }
   };
   const clearInput = () => {
     onInputChange('');
