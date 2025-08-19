@@ -28,7 +28,7 @@ export const InputForm: React.FC<InputFormProps> = ({
   onLanguageChange,
   t
 }) => {
-  const MAX_CHARACTERS = 120;
+  const MAX_CHARACTERS = 130;
   
   // Count characters using the same method as backend (UTF-8 rune count)
   const getCharacterCount = (text: string): number => {
