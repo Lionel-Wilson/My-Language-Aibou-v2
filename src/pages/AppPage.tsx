@@ -4,7 +4,6 @@ import { Menu, BookOpen, MessageCircle, CheckCircle, Home } from 'lucide-react';
 import { Sidebar } from '../components/Sidebar';
 import { TabContent } from '../components/TabContent';
 import { TextSelectionProvider } from '../components/WordHoverProvider';
-import { TextSelectionTooltip } from '../components/WordTooltip';
 import { HistoryItem } from '../types';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useTranslation } from '../hooks/useTranslation';
@@ -216,7 +215,6 @@ export const AppPage: React.FC = () => {
           </div>
         </div>
 
-        <TextSelectionTooltip />
       </div>
     </TextSelectionProvider>
   );
