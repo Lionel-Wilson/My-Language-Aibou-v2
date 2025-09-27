@@ -29,4 +29,5 @@ export interface LookupResponse {
   definition: string;
   synonyms: string;
   history: string;
+  context: string;
 }

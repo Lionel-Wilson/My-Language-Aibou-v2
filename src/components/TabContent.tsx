@@ -47,11 +47,12 @@ export const TabContent: React.FC<TabContentProps> = ({
       switch (activeTab) {
         case 'dictionary': {
           // NEW: single request returning an object
-          const data = await ApiService.lookupWord(input, language); // { definition, synonyms, history }
+          const data = await ApiService.lookupWord(input, language); // { definition, synonyms,context, history }
 
           // Nicely format (skip empty sections)
           const parts: string[] = [];
           if (data.definition?.trim()) parts.push(`## Definition\n\n${data.definition}`);
+          if (data.context?.trim()) parts.push(`## Contextual Usage\n\n${data.context}`);
           if (data.synonyms?.trim())   parts.push(`## Synonyms\n\n${data.synonyms}`);
           if (data.history?.trim())    parts.push(`## Word History\n\n${data.history}`);
           result = parts.join('\n\n');
