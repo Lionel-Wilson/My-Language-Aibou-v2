@@ -24,3 +24,9 @@ export interface Language {
   name: string;
   flag: string;
 }
+
+export interface LookupResponse {
+  definition: string;
+  synonyms: string;
+  history: string;
+}

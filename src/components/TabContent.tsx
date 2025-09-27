@@ -33,55 +33,64 @@ export const TabContent: React.FC<TabContentProps> = ({
 
 
   const handleSubmit = async (input: string, language: string) => {
-    onUpdateTabState({ 
-      loading: true, 
-      error: null, 
+    onUpdateTabState({
+      loading: true,
+      error: null,
       response: '',
       input,
-      language 
+      language,
     });
 
     try {
       let result = '';
-      
+
       switch (activeTab) {
-        case 'dictionary':
-          // Call all three word endpoints simultaneously
-          const [definition, synonyms, history] = await Promise.all([
-            ApiService.getDefinition(input, language),
-            ApiService.getSynonyms(input, language),
-            ApiService.getWordHistory(input, language)
-          ]);
-          
-          result = `## Definition\n\n${definition}\n\n## Synonyms\n\n${synonyms}\n\n## Word History\n\n${history}`;
+        case 'dictionary': {
+          // NEW: single request returning an object
+          const data = await ApiService.lookupWord(input, language); // { definition, synonyms, history }
+
+          // Nicely format (skip empty sections)
+          const parts: string[] = [];
+          if (data.definition?.trim()) parts.push(`## Definition\n\n${data.definition}`);
+          if (data.synonyms?.trim())   parts.push(`## Synonyms\n\n${data.synonyms}`);
+          if (data.history?.trim())    parts.push(`## Word History\n\n${data.history}`);
+          result = parts.join('\n\n');
           break;
-        case 'translate':
-          result = await ApiService.explainSentence(input, language, translationMode === 'detailed');
+        }
+
+        case 'translate': {
+          result = await ApiService.explainSentence(
+              input,
+              language,
+              translationMode === 'detailed'
+          );
           break;
-        case 'correction':
+        }
+
+        case 'correction': {
           result = await ApiService.correctSentence(input, language);
           break;
+        }
+
         default:
           throw new Error('Invalid tab');
       }
 
       onUpdateTabState({ response: result, loading: false });
-      
-      // Add to history
+
       const historyItem: HistoryItem = {
         id: Date.now().toString(),
-        type: activeTab === 'translate' ? 'analyse' : activeTab as HistoryItem['type'],
+        type: activeTab === 'translate' ? 'analyse' : (activeTab as HistoryItem['type']),
         query: input,
         response: result,
         timestamp: Date.now(),
         language,
       };
-      
       onAddToHistory(historyItem);
     } catch (err) {
-      onUpdateTabState({ 
+      onUpdateTabState({
         error: err instanceof Error ? err.message : 'An error occurred',
-        loading: false 
+        loading: false,
       });
     }
   };
