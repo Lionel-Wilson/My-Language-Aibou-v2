@@ -20,7 +20,17 @@ export class ApiService {
     }
 
     const result = await response.text();
-    return result.replace(/^"|"$/g, ''); // your existing quote trim
+    const trimmed = result.trim();
+    if (!trimmed) return trimmed;
+
+    try {
+      const parsed = JSON.parse(trimmed);
+      if (typeof parsed === 'string') return parsed;
+    } catch {
+      // Fall back to legacy quote trimming for non-JSON responses
+    }
+
+    return trimmed.replace(/^"|"$/g, '');
   }
 
   // JSON responses (new endpoints)

@@ -49,6 +49,10 @@ export const ResponseArea: React.FC<ResponseAreaProps> = ({
   // Process the content to handle escaped characters and formatting
   const processContent = (rawContent: string) => {
     return rawContent
+      // Unescape JSON-style escape sequences from API responses
+      .replace(/\\\\/g, '\\')
+      .replace(/\\"/g, '"')
+      .replace(/\\'/g, "'")
       // Convert literal \n to actual line breaks
       .replace(/\\n/g, '\n')
       // Convert \n\n to proper paragraph breaks
